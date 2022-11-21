@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "366915349193",
+    "project_id": "doccrypt-f386a",
+    "storage_bucket": "doccrypt-f386a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366915349193:android:6664e695385b0dbcba3b18",
+        "android_client_info": {
+          "package_name": "com.upt.cti.doccrypt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366915349193-llhd4r00df1l5hfpachpnptri2lavj1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.upt.cti.doccrypt",
+            "certificate_hash": "d1be0a4749b32d12aa34997c5b4c76263263fbdf"
+          }
+        },
+        {
+          "client_id": "366915349193-g4pl30sjjsvjfbbjsm9j00eon2iedag0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRTT4G6VMJHFS92Eg60ztzjJbNanXGbCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366915349193-g4pl30sjjsvjfbbjsm9j00eon2iedag0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
