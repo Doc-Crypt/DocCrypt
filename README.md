@@ -1,1 +1,1 @@
-# DocCrypt
+# DocCrypt Mobile app (Kotlin)

@@ -21,12 +21,148 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131" />
+        app:layout_constraintVertical_bias="0.089" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_account_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="190dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/create_account"
+        android:textColor="#455A64"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.763"
+        app:strokeColor="@color/white" />
+
+
+    <RadioGroup
+        android:layout_width="330dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383">
+
+        <RadioButton
+            android:id="@+id/type_user"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/user"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/type_notary"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:text="@string/notary"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/register_email"
+        android:layout_width="330dp"
+        android:layout_height="70dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/border"
+        android:drawableEnd="@drawable/mail"
+        android:hint="@string/mail"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="104dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:text="@string/sign_in"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869" />
+
+    <TextView
+        android:id="@+id/have_account_textview"
+        android:layout_width="208dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="@string/already_have_an_account"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869" />
+
+    <EditText
+        android:id="@+id/register_password"
+        android:layout_width="330dp"
+        android:layout_height="70dp"
+        android:autofillHints="password"
+        android:background="@drawable/border"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <ImageButton
+        android:id="@+id/register_password_visibility"
+        android:layout_width="48dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/pass_visibility"
+        android:src="@drawable/eye_show"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
 
     <EditText
         android:id="@+id/full_name"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
+        android:layout_width="330dp"
+        android:layout_height="70dp"
         android:autofillHints="emailAddress"
         android:background="@drawable/border"
         android:drawableEnd="@drawable/person"
@@ -34,140 +170,14 @@
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29" />
-
-    <RadioButton
-        android:id="@+id/type_user"
-        android:layout_width="135dp"
-        android:layout_height="60dp"
-        android:background="@drawable/border"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/user"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
-
-    <RadioButton
-        android:id="@+id/type_notary"
-        android:layout_width="135dp"
-        android:layout_height="60dp"
-        android:background="@drawable/border"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/notar"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.742"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
-
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:autofillHints="emailAddress"
-        android:background="@drawable/border"
-        android:drawableEnd="@drawable/mail_x"
-        android:hint="@string/mail"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51" />
-
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:autofillHints="password"
-        android:background="@drawable/border"
-        android:inputType="textPassword"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/password"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="48dp"
-        android:layout_height="60dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="0dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/pass_visibility"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.619"
-        app:srcCompat="@drawable/pass_eye" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_account_button"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="179dp"
-        android:layout_height="68dp"
-        android:text="@string/create_account"
         android:textColor="@color/white"
-        android:textStyle="bold"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758"
-        app:strokeColor="@color/white" />
+        app:layout_constraintVertical_bias="0.258" />
 
-    <TextView
-        android:id="@+id/have_account_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/already_have_an_account"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.31"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.855" />
-
-    <Button
-        android:id="@+id/sign_in_button"
-        android:layout_width="99dp"
-        android:layout_height="48dp"
-        android:background="@android:color/transparent"
-        android:text="@string/sign_in"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
 </androidx.constraintlayout.widget.ConstraintLayout>
