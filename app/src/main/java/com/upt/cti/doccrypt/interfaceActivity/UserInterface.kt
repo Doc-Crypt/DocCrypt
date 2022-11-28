@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upt.cti.doccrypt.R
+import com.upt.cti.doccrypt.entity.DocFile
+import com.upt.cti.doccrypt.entity.DocFileStatus
+import com.upt.cti.doccrypt.entity.DocFileStatus.*
 import java.io.File
 
 
@@ -21,18 +25,32 @@ class UserInterface : AppCompatActivity() {
         noFilesText = findViewById(R.id.no_files)
         docRV = findViewById(R.id.doc_recycler)
 
-        val path = intent.getStringExtra("path")
-        val root = path?.let { File(it) }
-        val filesAndFolders = root?.listFiles()
 
-        if (filesAndFolders == null || filesAndFolders.size == 0) {
+        val filesAndFolders = getListOfDoc()
+
+        if (filesAndFolders.size == 0) {
             noFilesText.visibility = View.VISIBLE
             return
         }
-
         noFilesText.visibility = View.INVISIBLE
 
-        docRV.setLayoutManager(LinearLayoutManager(this))
-//        docRV.setAdapter(UserInterfaceAdapter(applicationContext, filesAndFolders))
+        docRV.adapter = UserInterfaceAdapter(filesAndFolders)
+        docRV.layoutManager = GridLayoutManager(this, 3)
+        docRV.setHasFixedSize(true)
+
+
+    }
+    private fun getListOfDoc(): ArrayList<DocFile>{
+        val list =  ArrayList<DocFile>()
+        for (i in 0 .. 100){
+            val status: DocFileStatus = when (i % 3) {
+                0 -> CHECKED
+                1 -> DENIED
+                else -> PENDING
+            }
+
+            list.add(DocFile("new Folder $i", status))
+        }
+        return list
     }
 }
