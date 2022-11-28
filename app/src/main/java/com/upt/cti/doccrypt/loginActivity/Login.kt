@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.upt.cti.doccrypt.R
+import com.upt.cti.doccrypt.interfaceActivity.UserInterface
 
 class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -58,6 +59,9 @@ class Login : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, UserInterface::class.java)
+                startActivity(intent)
+
             } else
                 Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
         }

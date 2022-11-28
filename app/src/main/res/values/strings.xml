@@ -13,7 +13,7 @@
     <string name="user">User</string>
     <string name="pass_visibility">pass_visibility</string>
     <string name="upload">UPLOAD</string>
-    <string name="upload_file">Upload file</string>
+    <string name="upload_doc">Upload document</string>
     <string name="logo">logo</string>
     <string name="upload_image">Upload image</string>
     <string name="no_files_found">NO FILES FOUND</string>
@@ -22,4 +22,7 @@
     <string name="unapproved">Unapproved</string>
     <string name="_99">99</string>
     <string name="name_surname">Name Surname</string>
+    <string name="folder_name">Folder_name</string>
+    <string name="status_img">status_img</string>
+    <string name="folder_img">folder_img</string>
 </resources>
