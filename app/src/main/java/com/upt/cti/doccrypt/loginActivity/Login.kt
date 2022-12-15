@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.upt.cti.doccrypt.R
+import com.upt.cti.doccrypt.authentication_manager.AuthenticationManager
+import com.upt.cti.doccrypt.interfaceActivity.UserInterface
 
 class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -39,10 +41,23 @@ class Login : AppCompatActivity() {
                 visibilityButton.setImageResource(R.drawable.eye_hide)
             }
         }
+        password.setOnClickListener {
+            val email = email.text.toString()
+            val password = password.text.toString()
+            AuthenticationManager.login(email, password, this)
+        }
 
         findViewById<Button>(R.id.login_button).setOnClickListener {
-            login()
+            val email = email.text.toString()
+            val password = password.text.toString()
+            AuthenticationManager.login(email, password, this)
+            if(AuthenticationManager.getIsLoggedIn()){
+                Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, UserInterface::class.java)
+                startActivity(intent)
+            }else  Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
         }
+
 
         findViewById<Button>(R.id.register_button).setOnClickListener {
             val intent = Intent(this, Register::class.java)
@@ -50,16 +65,5 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun login(){
-        val email = email.text.toString()
-        val password = password.text.toString()
-        Log.e(TAG, email)
-        Log.e(TAG, password)
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this) {
-            if (it.isSuccessful) {
-                Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
-            } else
-                Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
-        }
-    }
+
 }
