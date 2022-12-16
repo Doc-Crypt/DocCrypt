@@ -1,11 +1,10 @@
 package com.upt.cti.doccrypt.interfaceActivity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView
 import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus.*

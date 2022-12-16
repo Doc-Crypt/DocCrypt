@@ -25,4 +25,9 @@
     <string name="folder_name">Folder_name</string>
     <string name="status_img">status_img</string>
     <string name="folder_img">folder_img</string>
+    <string name="doccrypto">DocCrypto</string>
+    <string name="take_photo">Take a photo of the file</string>
+    <string name="send_doc">Send document</string>
+    <string name="open" />
+    <string name="close" />
 </resources>
