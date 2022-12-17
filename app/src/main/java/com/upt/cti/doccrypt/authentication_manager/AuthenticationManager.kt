@@ -14,7 +14,7 @@ import org.json.JSONObject
 const val BASE_URL = "http://192.168.0.107:8075"
 object AuthenticationManager {
     private var authenticationToken:String? = null
-    private var username:String? = null
+    private var userFullName:String? = null
     private var isLoggedIn: Boolean = false
 
     fun login(username: String?, password: String?, context: Context): Boolean{
@@ -34,7 +34,7 @@ object AuthenticationManager {
                 Log.d(TAG, "Response: %s".format(response.toString()))
                 result = JSONObject(response.toString())
                 authenticationToken = result!!.get("token") as String?;
-                this.username = result!!.get("username") as String
+                this.userFullName = result!!.get("FullName") as String
                 this.isLoggedIn = true
             },
             { error ->
@@ -46,11 +46,11 @@ object AuthenticationManager {
     }
     fun logout(){
         authenticationToken = null
-        username = null
+        userFullName = null
         isLoggedIn = false
     }
     fun getToken() = authenticationToken
-    fun getUserName() = username
+    fun getUserFullName() = userFullName
     fun getIsLoggedIn() = isLoggedIn
 
 }

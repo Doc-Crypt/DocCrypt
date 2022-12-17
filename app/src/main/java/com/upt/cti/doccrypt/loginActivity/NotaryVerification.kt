@@ -1,11 +1,15 @@
 package com.upt.cti.doccrypt.loginActivity
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +39,8 @@ class NotaryVerification : AppCompatActivity() {
 
                 // Get PDF path
                 val sPath: String? = sUri?.path
+                val filename = sPath?.substring(sPath.lastIndexOf("/")+1)
+                findViewById<TextView>(R.id.file_name).text = filename
             }
         }
 

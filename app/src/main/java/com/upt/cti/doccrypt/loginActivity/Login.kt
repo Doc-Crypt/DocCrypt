@@ -54,6 +54,7 @@ class Login : AppCompatActivity() {
             if(AuthenticationManager.getIsLoggedIn()){
                 Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, UserInterface::class.java)
+                intent.putExtra("FullUserName", AuthenticationManager.getUserFullName())
                 startActivity(intent)
             }else  Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
         }

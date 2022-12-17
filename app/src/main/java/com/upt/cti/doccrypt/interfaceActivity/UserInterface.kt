@@ -18,6 +18,7 @@ import com.upt.cti.doccrypt.entity.DocFileStatus.*
 
 class UserInterface : AppCompatActivity() {
     private lateinit var noFilesText : TextView
+    private lateinit var fullName : TextView
     private lateinit var docRV : RecyclerView
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -28,6 +29,8 @@ class UserInterface : AppCompatActivity() {
         // Navdrawer related
         val drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout_left)
         val navView : NavigationView = findViewById(R.id.nav_menu_left)
+        fullName = findViewById(R.id.full_name)
+        fullName.text = intent.getStringExtra("FullUserName")
 
         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -38,7 +41,7 @@ class UserInterface : AppCompatActivity() {
             when(it.itemId){
                 R.id.menu_upload_doc-> Toast.makeText(applicationContext, "Click upload", Toast.LENGTH_SHORT).show()
                 R.id.menu_take_photo-> Toast.makeText(applicationContext, "Click photo", Toast.LENGTH_SHORT).show()
-                R.id.menu_send_doc-> Toast.makeText(applicationContext, "Click sebd", Toast.LENGTH_SHORT).show()
+                R.id.menu_send_doc-> Toast.makeText(applicationContext, "Click send", Toast.LENGTH_SHORT).show()
             }
             true
         }
