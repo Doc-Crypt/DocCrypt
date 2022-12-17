@@ -22,6 +22,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/upload_button"
         style="?attr/materialButtonOutlinedStyle"
+        android:theme="@style/Theme.MaterialComponents.Light"
         android:layout_width="131dp"
         android:layout_height="66dp"
         android:backgroundTint="@android:color/darker_gray"

@@ -17,29 +17,8 @@
         tools:targetApi="33">
         <activity
             android:name=".interfaceActivity.UserInterface"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".loginActivity.NotaryVerification"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="false" />
-
-        </activity>
-        <activity
-            android:name=".loginActivity.Register"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".loginActivity.Login"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,9 +30,34 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="false">
+            android:name=".loginActivity.NotaryVerification"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="false" />
 
+        </activity>
+        <activity
+            android:name=".loginActivity.Register"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".loginActivity.Login"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
