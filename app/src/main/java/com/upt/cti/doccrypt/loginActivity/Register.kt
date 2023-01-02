@@ -19,9 +19,6 @@ import com.upt.cti.doccrypt.authentication_manager.BASE_URL
 import org.json.JSONObject
 import java.util.Objects
 
-const val BASE_URL = "http://192.168.0.107:8075"
-
-
 class Register : AppCompatActivity() {
 
     private lateinit var email: EditText
@@ -67,6 +64,7 @@ class Register : AppCompatActivity() {
     private fun signUpUser() {
         val email = email.text.toString()
         val pass = password.text.toString()
+        val fullName = fullName.text.toString()
 
         if (email.isBlank() || pass.isBlank()) {
             Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
@@ -84,6 +82,9 @@ class Register : AppCompatActivity() {
         }
         if(notaryRadioButton.isChecked){
             val intent = Intent(this, NotaryVerification::class.java)
+            intent.putExtra("email", email)
+            intent.putExtra("password", pass)
+            intent.putExtra("fullName", fullName)
             startActivity(intent)
         }else{
             registrationUserOnTheServer()
