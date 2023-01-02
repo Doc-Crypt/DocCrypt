@@ -11,14 +11,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.regex.Pattern;
 
 
 @RestController
@@ -40,10 +37,19 @@ public class AuthenticationRestControllerV1 {
 
     @PostMapping("login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+        String emailRegex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(emailRegex);
+
         try {
+            User user;
             String username = requestDto.getUsername();
+            if(pattern.matcher(username).matches()){
+                user = userService.getUserByEmail(username);
+                username = user.getUsername();
+            }else user = userService.findByUsername(username);
+
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
-            User user = userService.findByUsername(username);
+
 
             if (user == null) {
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
@@ -52,7 +58,7 @@ public class AuthenticationRestControllerV1 {
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
             Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
+            response.put("FullName", user.getFirstName() + " " + user.getLastName());
             response.put("token", token);
 
             return ResponseEntity.ok(response);
@@ -60,4 +66,7 @@ public class AuthenticationRestControllerV1 {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
+
+
+
 }

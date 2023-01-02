@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User register(User user);
+    User register(User user, Boolean isNotary);
 
     List<User> getAll();
 
@@ -16,4 +16,8 @@ public interface UserService {
     User findById(Long id);
 
     void delete(Long id);
+
+    Boolean containUserByEmail(String email);
+
+    User getUserByEmail(String email);
 }
