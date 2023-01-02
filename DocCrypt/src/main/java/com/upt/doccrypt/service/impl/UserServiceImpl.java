@@ -30,8 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User user) {
-        Role roleUser = roleRepository.findByName("ROLE_USER");
+    public User register(User user, Boolean isNotary) {
+        Role roleUser;
+        if(isNotary) roleUser = roleRepository.findByName("ROLE_NOTARY");
+        else roleUser = roleRepository.findByName("ROLE_USER");
+
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 
@@ -77,5 +80,22 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userRepository.deleteById(id);
         log.info("IN delete - user with id: {} successfully deleted");
+    }
+
+    @Override
+    public Boolean containUserByEmail(String email) {
+        if(userRepository.findByEmail(email) != null) {
+            log.info("Exist user with this email");
+            return true;
+        }
+        else {
+            log.info("Doesn't exist user with this email");
+            return false;
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
