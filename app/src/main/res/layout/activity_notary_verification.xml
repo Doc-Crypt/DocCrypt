@@ -38,16 +38,17 @@
         app:strokeColor="@color/white" />
 
     <TextView
+        android:id="@+id/file_name"
         android:layout_width="246dp"
         android:layout_height="72dp"
         android:background="@drawable/border"
         android:drawablePadding="5dp"
         android:gravity="center"
-        android:text="@string/upload_doc"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="25sp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
+        android:text="@string/upload_doc"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp"
         app:drawableRightCompat="@drawable/file_upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

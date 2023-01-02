@@ -19,9 +19,6 @@ import com.upt.cti.doccrypt.authentication_manager.BASE_URL
 import org.json.JSONObject
 import java.util.Objects
 
-const val BASE_URL = "http://192.168.0.107:8075"
-
-
 class Register : AppCompatActivity() {
 
     private lateinit var email: EditText
@@ -43,7 +40,7 @@ class Register : AppCompatActivity() {
         visibilityButton = findViewById(R.id.register_password_visibility)
         email = findViewById(R.id.register_email)
         password = findViewById(R.id.register_password)
-
+        fullName = findViewById(R.id.full_name)
         visibilityButton.setOnClickListener {
             if (password.transformationMethod.equals(HideReturnsTransformationMethod.getInstance())) {
                 password.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -67,6 +64,7 @@ class Register : AppCompatActivity() {
     private fun signUpUser() {
         val email = email.text.toString()
         val pass = password.text.toString()
+        val fullName = fullName.text.toString()
 
         if (email.isBlank() || pass.isBlank()) {
             Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
@@ -82,26 +80,27 @@ class Register : AppCompatActivity() {
                     notaryRadioButton.isChecked = false
             }
         }
-        registrationOnTheServer()
-//        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
-//            if (it.isSuccessful) {
-//                Toast.makeText(this, "Successfully Singed Up", Toast.LENGTH_SHORT).show()
-//                finish()
-//            } else {
-//                Toast.makeText(this, "Singed Up Failed!", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        if(notaryRadioButton.isChecked){
+            val intent = Intent(this, NotaryVerification::class.java)
+            intent.putExtra("email", email)
+            intent.putExtra("password", pass)
+            intent.putExtra("fullName", fullName)
+            startActivity(intent)
+        }else{
+            registrationUserOnTheServer()
+        }
+
     }
 
-    private fun registrationOnTheServer(){
-        val params = HashMap<String, Objects>()
+    private fun registrationUserOnTheServer(){
+        val params = HashMap<String, String>()
         Log.e(TAG, "response")
-        params["username"] = fullName.text as Objects
-        params["email"] = email.text as Objects
-        params["firstName"] = email.text.toString().split(" ")[0] as Objects
-        params["lastName"] = email.text.toString().split(" ")[1] as Objects
-        params["password"] = password.text as Objects
-        params["isNotary"] = notaryRadioButton.isChecked as Objects
+        params["username"] = fullName.text.toString().split(" ")[0]
+        params["email"] = email.text.toString()
+        params["firstName"] = fullName.text.toString().split(" ")[0]
+        params["lastName"] = fullName.text.toString().split(" ")[1]
+        params["password"] = password.text.toString()
+        params["isNotary"] = notaryRadioButton.isChecked.toString()
 
         Log.e(TAG, "response $params")
         val queue = Volley.newRequestQueue(this)
@@ -112,10 +111,10 @@ class Register : AppCompatActivity() {
             jsonRequest,
             { response ->
                 Log.d(ContentValues.TAG, "Response: %s".format(response.toString()))
-                Toast.makeText(this, "Successfully Singed Up", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Successfully registered", Toast.LENGTH_SHORT).show()
             },
             { error ->
-                Toast.makeText(this, "Singed Up failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show()
                 Log.e(ContentValues.TAG, "Error: %s".format(error.toString()))
             }
         )
