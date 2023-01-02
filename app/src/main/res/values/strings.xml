@@ -13,7 +13,6 @@
     <string name="user">User</string>
     <string name="pass_visibility">pass_visibility</string>
     <string name="upload">UPLOAD</string>
-    <string name="upload_doc">Upload document</string>
     <string name="logo">logo</string>
     <string name="upload_image">Upload image</string>
     <string name="no_files_found">NO FILES FOUND</string>
@@ -26,8 +25,17 @@
     <string name="status_img">status_img</string>
     <string name="folder_img">folder_img</string>
     <string name="doccrypto">DocCrypto</string>
-    <string name="take_photo">Take a photo of the file</string>
-    <string name="send_doc">Send document</string>
-    <string name="open" />
-    <string name="close" />
+    <string name="open_left">Burger Menu Open</string>
+    <string name="close_left">Burger Menu Closed</string>
+    <string name="open_right">Notification Menu Open</string>
+    <string name="close_right">Notification Menu Closed</string>
+    <string name="email_gmail_com">email@gmail.com</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification">Notification</string>
+    <string name="the_document_doc_name_has_been_approved">The document \'Doc name\' has been approved</string>
+    <string name="see_document"><![CDATA[> See document]]></string>
+    <string name="no_notifications">NO NOTIFICATIONS</string>
+    <string name="create_a_folder">Create a folder</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="upload_doc">Upload DOC</string>
 </resources>
