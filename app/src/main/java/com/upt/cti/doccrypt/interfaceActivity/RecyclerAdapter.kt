@@ -10,7 +10,7 @@ import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus.*
 
 
-class UserInterfaceAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<UserInterfaceAdapter.DocFileHolder>() {
+class RecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<RecyclerAdapter.DocFileHolder>() {
 
     class DocFileHolder(view: View) : RecyclerView.ViewHolder(view) {
         var folderName: TextView
@@ -34,7 +34,6 @@ class UserInterfaceAdapter(private val filesAndFolders: ArrayList<DocFile>) : Re
             DENIED ->  holder.folderStatus.setImageResource(R.drawable.denied)
             PENDING -> holder.folderStatus.setImageResource(R.drawable.pending)
         }
-
     }
 
     override fun getItemCount() = filesAndFolders.size
