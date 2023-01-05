@@ -1,4 +1,5 @@
 package com.upt.cti.doccrypt.interfaceActivity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus.*
+import com.upt.cti.doccrypt.pdfViewer.PdfViewer
 
 
 class RecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<RecyclerAdapter.DocFileHolder>() {
@@ -19,6 +21,11 @@ class RecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : Recycle
         init {
             folderStatus = view.findViewById(R.id.folderStatus)
             folderName = view.findViewById(R.id.folder_name)
+
+            view.setOnClickListener{
+                val intent = Intent(view.context, PdfViewer::class.java)
+                view.context.startActivity(intent);
+            }
         }
     }
 
@@ -29,11 +36,14 @@ class RecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : Recycle
 
     override fun onBindViewHolder(holder: DocFileHolder, position: Int) {
         holder.folderName.text = filesAndFolders[position].folderName
+
         when(filesAndFolders[position].folderStatus){
             CHECKED -> holder.folderStatus.setImageResource(R.drawable.checked)
             DENIED ->  holder.folderStatus.setImageResource(R.drawable.denied)
             PENDING -> holder.folderStatus.setImageResource(R.drawable.pending)
         }
+
+
     }
 
     override fun getItemCount() = filesAndFolders.size

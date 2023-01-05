@@ -1,10 +1,12 @@
 package com.upt.cti.doccrypt.loginActivity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -16,17 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.authentication_manager.AuthenticationManager
-import org.apache.http.HttpEntity
-import org.apache.http.HttpResponse
-import org.apache.http.client.HttpClient
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.entity.mime.MultipartEntityBuilder
-import org.apache.http.entity.mime.content.FileBody
-import org.apache.http.impl.client.HttpClientBuilder
-import org.apache.http.util.EntityUtils
-import java.io.File
-import java.io.IOException
-import java.net.URL
+
 
 
 class NotaryVerification : AppCompatActivity() {
@@ -34,6 +26,7 @@ class NotaryVerification : AppCompatActivity() {
     private lateinit var file_name : TextView
     private lateinit var resultLauncher : ActivityResultLauncher<Intent>
     private lateinit var data: Intent
+//    private lateinit var pdfViewer: PDFView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +37,6 @@ class NotaryVerification : AppCompatActivity() {
         var email = intent.getStringExtra("email")
         var firstName = fullName?.split(" ")?.get(0)
         var lastName = fullName?.split(" ")?.get(1)
-
-
 
         upload = findViewById(R.id.upload_button)
         file_name =  findViewById(R.id.file_name)
@@ -69,7 +60,6 @@ class NotaryVerification : AppCompatActivity() {
         }
 
         upload.setOnClickListener {
-
             val sUri: Uri? = data.data
             val sPath: String? = sUri?.path
             val filename = sPath?.substring(sPath.lastIndexOf("/")+1)
@@ -85,6 +75,9 @@ class NotaryVerification : AppCompatActivity() {
             }
         }
 
+//        var pdfUrl = "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"
+//        pdfViewer = findViewById(R.id.pdfView)
+//        RetrievePDFFromURL(pdfViewer).execute(pdfUrl)
 
     }
 
@@ -104,6 +97,31 @@ class NotaryVerification : AppCompatActivity() {
             Toast.makeText(applicationContext, "Permission Denied",Toast.LENGTH_SHORT).show()
         }
     }
+
+//    class RetrievePDFFromURL(pdfView: PDFView) :
+//        AsyncTask<String, Void, InputStream>() {
+//        @SuppressLint("StaticFieldLeak")
+//        val mypdfView: PDFView = pdfView
+//        override fun doInBackground(vararg params: String?): InputStream? {
+//            var inputStream: InputStream? = null
+//            try {
+//                val url = URL(params.get(0))
+//                val urlConnection: HttpURLConnection = url.openConnection() as HttpsURLConnection
+//                if (urlConnection.responseCode == 200) {
+//                    inputStream = BufferedInputStream(urlConnection.inputStream)
+//                }
+//            }
+//            catch (e: Exception) {
+//                e.printStackTrace()
+//                return null;
+//            }
+//            return inputStream;
+//        }
+//        override fun onPostExecute(result: InputStream?) {
+//            mypdfView.fromStream(result).load()
+//
+//        }
+//    }
 
 
 }

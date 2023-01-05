@@ -38,4 +38,5 @@
     <string name="create_a_folder">Create a folder</string>
     <string name="log_out">LOG OUT</string>
     <string name="upload_doc">Upload DOC</string>
+    <string name="logout">Logout</string>
 </resources>

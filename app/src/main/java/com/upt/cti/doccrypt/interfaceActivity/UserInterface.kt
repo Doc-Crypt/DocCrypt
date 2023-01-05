@@ -1,5 +1,6 @@
 package com.upt.cti.doccrypt.interfaceActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -10,13 +11,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.upt.cti.doccrypt.R
+import com.upt.cti.doccrypt.authentication_manager.AuthenticationManager
 import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus
 import com.upt.cti.doccrypt.entity.DocFileStatus.PENDING
 import com.upt.cti.doccrypt.entity.Notification
 import com.upt.cti.doccrypt.entity.NotificationStatus
+import com.upt.cti.doccrypt.loginActivity.Login
 
 class UserInterface : AppCompatActivity() {
     private lateinit var noFilesText : TextView
@@ -28,6 +32,7 @@ class UserInterface : AppCompatActivity() {
     private lateinit var notificationBtn : ImageButton
     private lateinit var drawerLeft : NavigationView
     private lateinit var drawerRight : NavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,9 +86,17 @@ class UserInterface : AppCompatActivity() {
         drawerLeft.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_create_new_folder-> Toast.makeText(applicationContext, "Create folder", Toast.LENGTH_SHORT).show()
+                R.id.logout_button -> {
+                    Toast.makeText(applicationContext, "Logout", Toast.LENGTH_SHORT).show()
+                    AuthenticationManager.logout()
+                    val intent = Intent(this, Login::class.java)
+                    startActivity(intent)
+
+                }
             }
             true
         }
+
         // Drawer related ------------------------------------------
 
 
