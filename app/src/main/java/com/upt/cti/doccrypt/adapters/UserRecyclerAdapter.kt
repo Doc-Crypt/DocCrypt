@@ -1,4 +1,4 @@
-package com.upt.cti.doccrypt.interfaceActivity
+package com.upt.cti.doccrypt.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +10,15 @@ import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus.*
 
 
-class RecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<RecyclerAdapter.DocFileHolder>() {
+class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<UserRecyclerAdapter.DocFileHolder>() {
 
     class DocFileHolder(view: View) : RecyclerView.ViewHolder(view) {
         var folderName: TextView
         var folderStatus: ImageView
 
         init {
-            folderStatus = view.findViewById(R.id.folderStatus)
-            folderName = view.findViewById(R.id.folder_name)
+            folderStatus = view.findViewById(R.id.user_folder_status)
+            folderName = view.findViewById(R.id.user_folder_name)
         }
     }
 

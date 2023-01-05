@@ -43,6 +43,29 @@
             android:scaleType="centerInside"
             android:src="@drawable/notification" />
 
+        <TextView
+            android:id="@+id/notification_count"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:padding="4dp"
+            android:text="@string/_99"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.308"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.811"
+            tools:ignore="TextContrastCheck" />
+
         <ImageView
             tools:ignore="ImageContrastCheck"
             android:layout_width="?attr/actionBarSize"

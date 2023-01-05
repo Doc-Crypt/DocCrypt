@@ -1,30 +1,35 @@
 package com.upt.cti.doccrypt.interfaceActivity
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.upt.cti.doccrypt.R
+import com.upt.cti.doccrypt.adapters.NotaryFoldersAdapter
 import com.upt.cti.doccrypt.adapters.NotificationDrawerAdapter
-import com.upt.cti.doccrypt.adapters.UserRecyclerAdapter
-import com.upt.cti.doccrypt.entity.DocFile
-import com.upt.cti.doccrypt.entity.DocFileStatus
+import com.upt.cti.doccrypt.entity.Folder
+import com.upt.cti.doccrypt.entity.FolderStatus
 import com.upt.cti.doccrypt.entity.Notification
 import com.upt.cti.doccrypt.entity.NotificationStatus
 
 
-class UserInterface : AppCompatActivity() {
-    private lateinit var noFilesText : TextView
+class  NotaryInterface : AppCompatActivity() {
+    private lateinit var frameLayout: FrameLayout
+    private lateinit var noFoldersText : TextView
+    private lateinit var folderRV : RecyclerView
+    private lateinit var personalBtn : Button
+    private lateinit var publicBtn : Button
+
     private lateinit var noNotifications : TextView
-    private lateinit var docRV : RecyclerView
     private lateinit var notificationRV : RecyclerView
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var menuBtn : ImageButton
@@ -32,20 +37,16 @@ class UserInterface : AppCompatActivity() {
     private lateinit var drawerLeft : NavigationView
     private lateinit var drawerRight : NavigationView
     private lateinit var notificationCnt : TextView
-    private lateinit var frameLayout: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_interface)
 
-        // Drawer realated --------------------------------
+
+        // Drawer realated --------------------------------   !!!  TEMPORAR !!!
 
         drawerLayout = findViewById(R.id.drawer_layout)
-
-        // frame pt a putea schimba activitatea interface in activitatea drawer
         frameLayout = findViewById(R.id.container)
-        layoutInflater.inflate(R.layout.content_user_interface, frameLayout)
-
 
         menuBtn = findViewById(R.id.menu_btn)
         notificationBtn = findViewById(R.id.notification_btn)
@@ -53,6 +54,7 @@ class UserInterface : AppCompatActivity() {
         drawerLeft = findViewById(R.id.nav_menu)
         drawerRight = findViewById(R.id.nav_notification)
 
+        layoutInflater.inflate(R.layout.content_notary_interface, frameLayout)
 
         menuBtn.setOnClickListener {
             if (drawerLayout.isDrawerOpen(drawerLeft)) {
@@ -100,36 +102,72 @@ class UserInterface : AppCompatActivity() {
             }
             true
         }
-        // Drawer related ------------------------------------------
 
+        // Notary buttons -----------------------------------
 
+        personalBtn = findViewById(R.id.personal_btn)
+        publicBtn = findViewById(R.id.public_btn)
 
-        // File Recycler related -----------------------------
-        noFilesText = findViewById(R.id.user_no_files)
-        docRV = findViewById(R.id.user_doc_recycler)
+        noFoldersText = findViewById(R.id.notary_no_folders)
+        folderRV = findViewById(R.id.notary_folder_recycler)
 
+        var notaryFolders = getListOfPersonalFolders()
+        getFolderRecyclerContent(notaryFolders)
 
-        val filesAndFolders = getListOfDoc()
+        personalBtn.setOnClickListener {
+            notaryFolders = getListOfPersonalFolders()
+            getFolderRecyclerContent(notaryFolders)
 
-        if (filesAndFolders.size == 0) noFilesText.visibility = View.VISIBLE
-        else noFilesText.visibility = View.INVISIBLE
+            personalBtn.setBackgroundColor(Color.BLACK)
+            personalBtn.setTextColor(Color.LTGRAY)
+            publicBtn.setBackgroundColor(Color.LTGRAY)
+            publicBtn.setTextColor(Color.BLACK)
+        }
 
-        docRV.adapter = UserRecyclerAdapter(filesAndFolders)
-        docRV.layoutManager = GridLayoutManager(this, 3)
-        docRV.setHasFixedSize(true)
-//        // File Recycler related ----------------------------
+        publicBtn.setOnClickListener {
+            notaryFolders = getListOfPublicFolders()
+            getFolderRecyclerContent(notaryFolders)
+
+            personalBtn.setBackgroundColor(Color.LTGRAY)
+            personalBtn.setTextColor(Color.BLACK)
+            publicBtn.setBackgroundColor(Color.BLACK)
+            publicBtn.setTextColor(Color.LTGRAY)
+        }
+        // Notary buttons -----------------------------------]
     }
 
-    private fun getListOfDoc(): ArrayList<DocFile>{
-        val list =  ArrayList<DocFile>()
-        for (i in 0 .. 30){
-            val docStatus: DocFileStatus = when (i % 3) {
-                0 -> DocFileStatus.CHECKED
-                1 -> DocFileStatus.DENIED
-                else -> DocFileStatus.PENDING
+    private fun getFolderRecyclerContent(notaryFolders : ArrayList<Folder>) {
+        if (notaryFolders.size == 10) noFoldersText.visibility = View.VISIBLE
+        else noFoldersText.visibility = View.INVISIBLE
+        folderRV.adapter = NotaryFoldersAdapter(notaryFolders)
+        folderRV.layoutManager = LinearLayoutManager(this)
+        folderRV.setHasFixedSize(true)
+    }
+
+    private fun getListOfPersonalFolders(): ArrayList<Folder>{
+        val list =  ArrayList<Folder>()
+        for (i in 0 .. 8){
+            val folderStatus: FolderStatus = when (i % 3) {
+                0 -> FolderStatus.CHECKED
+                1 -> FolderStatus.DENIED
+                else -> FolderStatus.PENDING
             }
 
-            list.add(DocFile("new Folder $i", docStatus))
+            list.add(Folder("Personal Folder $i", folderStatus))
+        }
+        return list
+    }
+
+    private fun getListOfPublicFolders(): ArrayList<Folder>{
+        val list =  ArrayList<Folder>()
+        for (i in 0 .. 8){
+            val folderStatus: FolderStatus = when (i % 3) {
+                0 -> FolderStatus.CHECKED
+                1 -> FolderStatus.DENIED
+                else -> FolderStatus.PENDING
+            }
+
+            list.add(Folder("Public Folder $i", folderStatus))
         }
         return list
     }
@@ -146,5 +184,4 @@ class UserInterface : AppCompatActivity() {
         }
         return list
     }
-
 }

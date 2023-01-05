@@ -16,14 +16,22 @@
         android:theme="@style/Theme.DocCrypt"
         tools:targetApi="33">
         <activity
-            android:name=".interfaceActivity.UserInterface"
+            android:name=".interfaceActivity.NotaryInterface"
             android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".interfaceActivity.UserInterface"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -36,7 +44,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="false" />
-
         </activity>
         <activity
             android:name=".loginActivity.Register"
@@ -49,14 +56,6 @@
         <activity
             android:name=".loginActivity.Login"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"

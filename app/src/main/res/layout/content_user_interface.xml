@@ -20,24 +20,25 @@
         app:layout_constraintVertical_bias="0.643">
 
         <TextView
-            android:layout_width="110dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
             android:paddingTop="5dp"
+            android:paddingEnd="5dp"
             android:text="@string/unapproved"
-            android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.762"
+            app:layout_constraintHorizontal_bias="0.777"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.825"
+            app:layout_constraintVertical_bias="0.785"
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/full_name"
+            android:id="@+id/user_full_name"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:paddingStart="10dp"
@@ -54,48 +55,49 @@
             app:layout_constraintVertical_bias="0.266" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
             android:paddingTop="5dp"
+            android:paddingEnd="5dp"
             android:text="@string/approved"
-            android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintHorizontal_bias="0.082"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.825"
+            app:layout_constraintVertical_bias="0.785"
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/approved_count"
+            android:id="@+id/user_approved_count"
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:background="@drawable/rounded_corners"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:paddingTop="3dp"
+            android:padding="5dp"
             android:text="@string/_99"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.308"
+            app:layout_constraintHorizontal_bias="0.297"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.811"
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/unapproved_count"
+            android:id="@+id/user_unapproved_count"
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:background="@drawable/rounded_corners"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:paddingTop="3dp"
+            android:padding="5dp"
             android:text="@string/_99"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -122,7 +124,7 @@
         app:layout_constraintVertical_bias="0.826">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/doc_recycler"
+            android:id="@+id/user_doc_recycler"
             android:layout_width="380dp"
             android:layout_height="510dp"
             android:paddingStart="20dp"
@@ -164,7 +166,7 @@
             app:layout_constraintVertical_bias="0.1" />
 
         <TextView
-            android:id="@+id/no_files"
+            android:id="@+id/user_no_files"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_files_found"
