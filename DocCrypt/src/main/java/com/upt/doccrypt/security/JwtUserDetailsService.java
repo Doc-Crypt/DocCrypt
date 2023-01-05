@@ -1,6 +1,6 @@
 package com.upt.doccrypt.security;
 
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.security.jwt.JwtUser;
 import com.upt.doccrypt.security.jwt.JwtUserFactory;
 import com.upt.doccrypt.service.UserService;

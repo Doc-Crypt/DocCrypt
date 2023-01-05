@@ -1,0 +1,67 @@
+package com.upt.doccrypt.service.impl;
+
+import com.upt.doccrypt.model.Role;
+import com.upt.doccrypt.model.Status;
+import com.upt.doccrypt.model.user.Notary;
+import com.upt.doccrypt.repository.RoleRepository;
+import com.upt.doccrypt.repository.user_repository.NotaryRepository;
+import com.upt.doccrypt.service.NotaryService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+@Service
+@Slf4j
+public class NotaryServiceImpl implements NotaryService {
+
+
+    private final NotaryRepository notaryRepository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public NotaryServiceImpl(NotaryRepository notaryRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.notaryRepository = notaryRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public Notary register(Notary notary) {
+        Role roleUser = roleRepository.findByName("ROLE_NOTARY");
+        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(roleUser);
+
+        notary.setPassword(passwordEncoder.encode(notary.getPassword()));
+        notary.setRoles(userRoles);
+        notary.setStatus(Status.ACTIVE);
+        Notary registeredCustomer = notaryRepository.save(notary);
+
+        log.info("IN register - notary: {} successfully registered", registeredCustomer);
+
+        return registeredCustomer;
+    }
+
+    @Override
+    public List<Notary> getAll() {
+        return null;
+    }
+
+    @Override
+    public Notary findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public Boolean containUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public Notary getUserByEmail(String email) {
+        return null;
+    }
+}

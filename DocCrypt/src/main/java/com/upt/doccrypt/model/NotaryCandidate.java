@@ -1,11 +1,13 @@
 package com.upt.doccrypt.model;
 
 
+import com.upt.doccrypt.model.user.Notary;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -30,17 +32,17 @@ public class NotaryCandidate extends BaseEntity {
     @Column(name = "prove_document")
     private byte[] proveDocument;
 
-    public User toUser(){
-        User user = new User();
-        user.setUsername(username);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setUpdated(new Date());
-        user.setCreated(new Date());
-        user.setStatus(Status.ACTIVE);
-        return user;
-        //ecaterina
+    public Notary toNotary(){
+        Notary notary = new Notary();
+        notary.setUsername(username);
+        notary.setFirstName(firstName);
+        notary.setLastName(lastName);
+        notary.setEmail(email);
+        notary.setPassword(password);
+        notary.setUpdated(new Date());
+        notary.setCreated(new Date());
+        notary.setStatus(Status.ACTIVE);
+        notary.setPersonalListOfFolders(new ArrayList<>());
+        return notary;
     }
 }

@@ -2,7 +2,7 @@ package com.upt.doccrypt.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.upt.doccrypt.model.Status;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import lombok.Data;
 
 /**

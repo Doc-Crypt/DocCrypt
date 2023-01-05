@@ -2,7 +2,7 @@ package com.upt.doccrypt.security.jwt;
 
 import com.upt.doccrypt.model.Role;
 import com.upt.doccrypt.model.Status;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

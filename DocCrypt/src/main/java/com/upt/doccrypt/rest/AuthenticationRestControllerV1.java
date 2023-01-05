@@ -1,7 +1,7 @@
 package com.upt.doccrypt.rest;
 
 import com.upt.doccrypt.dto.AuthenticationRequestDto;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.security.jwt.JwtTokenProvider;
 import com.upt.doccrypt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

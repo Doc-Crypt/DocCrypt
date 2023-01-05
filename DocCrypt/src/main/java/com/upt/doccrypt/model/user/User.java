@@ -1,12 +1,15 @@
-package com.upt.doccrypt.model;
+package com.upt.doccrypt.model.user;
 
+import com.upt.doccrypt.model.BaseEntity;
+import com.upt.doccrypt.model.Role;
+import com.upt.doccrypt.model.file.Folder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "users")
+@MappedSuperclass
 @Data
 public class User extends BaseEntity {
 
@@ -25,10 +28,15 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @OneToMany
+    private List<Folder> personalListOfFolders;
+
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    public void addFolder(Folder folder){
+        if(personalListOfFolders == null) personalListOfFolders = new ArrayList<>();
+        personalListOfFolders.add(folder);
+    }
 
 }

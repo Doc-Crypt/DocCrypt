@@ -2,10 +2,11 @@ package com.upt.doccrypt.service.impl;
 
 import com.upt.doccrypt.model.NotaryCandidate;
 import com.upt.doccrypt.model.Role;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.Notary;
+import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.repository.NotaryQueueRepository;
 import com.upt.doccrypt.repository.RoleRepository;
-import com.upt.doccrypt.repository.UserRepository;
+import com.upt.doccrypt.repository.user_repository.NotaryRepository;
 import com.upt.doccrypt.service.NotaryQueueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,20 @@ import java.util.UUID;
 @Slf4j
 public class NotaryQueueServiceImpl implements NotaryQueueService {
     private final NotaryQueueRepository notaryQueueRepository;
+    private final NotaryRepository notaryRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
 
+    private final UserServiceImpl userService;
     @Autowired
-    public NotaryQueueServiceImpl(NotaryQueueRepository notaryQueueRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public NotaryQueueServiceImpl(NotaryQueueRepository notaryQueueRepository, NotaryRepository repository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder, UserServiceImpl userService) {
         this.notaryQueueRepository = notaryQueueRepository;
+        this.notaryRepository = repository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
+
 
     @Override
     public NotaryCandidate addAsCandidate(NotaryCandidate notaryCandidate) {
@@ -55,12 +59,12 @@ public class NotaryQueueServiceImpl implements NotaryQueueService {
     }
 
     @Override
-    public Boolean addCandidateToUsers(NotaryCandidate notaryCandidate) {
-        if(userRepository.findByEmail(notaryCandidate.getEmail()) != null) {
+    public Boolean addCandidateToNotary(NotaryCandidate notaryCandidate) {
+        if(userService.containUserByEmail(notaryCandidate.getEmail())) {
             log.info("Email for candidate: {} already is taken", notaryCandidate);
             return false;
         }
-        if(userRepository.findByUsername(notaryCandidate.getUsername()) !=null){
+        if(userService.findByUsername(notaryCandidate.getUsername()) !=null){
             notaryCandidate.setUsername(notaryCandidate.getUsername() + UUID.randomUUID());
         }
 
@@ -68,9 +72,9 @@ public class NotaryQueueServiceImpl implements NotaryQueueService {
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 
-        User user = notaryCandidate.toUser();
-        user.setRoles(userRoles);
-        userRepository.save(user);
+        Notary notary = notaryCandidate.toNotary();
+        notary.setRoles(userRoles);
+        notaryRepository.save(notary);
         log.info("IN register - notary: {} successfully registered", notaryCandidate);
         notaryQueueRepository.delete(notaryCandidate);
         return true;

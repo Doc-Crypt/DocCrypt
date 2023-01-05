@@ -3,7 +3,6 @@ package com.upt.doccrypt.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.upt.doccrypt.model.NotaryCandidate;
 import com.upt.doccrypt.model.Status;
-import com.upt.doccrypt.model.User;
 import lombok.Data;
 
 @Data

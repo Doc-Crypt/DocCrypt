@@ -1,7 +1,7 @@
 package com.upt.doccrypt.security.jwt;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

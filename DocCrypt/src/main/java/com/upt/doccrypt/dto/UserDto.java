@@ -1,8 +1,12 @@
 package com.upt.doccrypt.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.Status;
+import com.upt.doccrypt.model.user.Customer;
+import com.upt.doccrypt.model.user.User;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * DTO class for user requests by ROLE_USER
@@ -17,7 +21,6 @@ public class UserDto {
     private String lastName;
     private String email;
     private String password;
-    private String isNotary;
     public User toUser(){
         User user = new User();
 //        user.setId(id);
@@ -26,8 +29,20 @@ public class UserDto {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
-
         return user;
+    }
+
+    public Customer toCustomer(){
+        Customer customer = new Customer();
+        customer.setUsername(username);
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setEmail(email);
+        customer.setPassword(password);
+        customer.setCreated(new Date());
+        customer.setUpdated(new Date());
+        customer.setStatus(Status.ACTIVE);
+        return customer;
     }
 
     public static UserDto fromUser(User user) {
@@ -39,8 +54,5 @@ public class UserDto {
         userDto.setEmail(user.getEmail());
 
         return userDto;
-    }
-    public Boolean getIsNotary(){
-        return isNotary.equals("true");
     }
 }

@@ -3,15 +3,12 @@ package com.upt.doccrypt.rest;
 import com.upt.doccrypt.dto.UserDto;
 import com.upt.doccrypt.model.NotaryCandidate;
 import com.upt.doccrypt.model.Status;
-import com.upt.doccrypt.model.User;
+import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.repository.NotaryQueueRepository;
 import com.upt.doccrypt.security.jwt.JwtTokenProvider;
 import com.upt.doccrypt.service.NotaryQueueService;
 import com.upt.doccrypt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +55,7 @@ public class RegisterRestController{
         User user = requestDto.toUser();
         user.setCreated(new Date());
         user.setUpdated(new Date());
-        userService.register(user, requestDto.getIsNotary());
+//        userService.register(user);
         Map<String, String> response = new HashMap<>();
         response.put("Response", "Ok");
         response.put("username", requestDto.getUsername());
