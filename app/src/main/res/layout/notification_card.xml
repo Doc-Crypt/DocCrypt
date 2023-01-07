@@ -24,7 +24,8 @@
                 android:padding="10dp"
                 android:src="@drawable/checked"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/close_notification_btn"
@@ -38,7 +39,7 @@
                 android:src="@drawable/close"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/see_doc_btn"
@@ -72,7 +73,7 @@
                 android:padding="3dp"
                 android:text="@string/the_document_doc_name_has_been_approved"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="11sp"
                 android:typeface="monospace"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

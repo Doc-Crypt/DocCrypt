@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,16 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DocCrypt"
-        tools:targetApi="33">
+        tools:targetApi="33" >
+        <activity
+            android:name=".interfaceActivity.OpenUserFolder"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".interfaceActivity.DrawerBase"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".interfaceActivity.NotaryInterface"
             android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -31,7 +42,12 @@
         <activity
             android:name=".interfaceActivity.UserInterface"
             android:exported="true"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -40,15 +56,15 @@
         <activity
             android:name=".loginActivity.NotaryVerification"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="false" />
+                android:value="" />
         </activity>
         <activity
             android:name=".loginActivity.Register"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -56,7 +72,7 @@
         <activity
             android:name=".loginActivity.Login"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

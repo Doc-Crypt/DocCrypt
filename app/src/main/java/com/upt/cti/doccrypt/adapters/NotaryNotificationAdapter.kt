@@ -12,9 +12,9 @@ import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.entity.Notification
 import com.upt.cti.doccrypt.entity.NotificationStatus.*
 
-class NotificationDrawerAdapter (private val notifications: ArrayList<Notification>) : RecyclerView.Adapter<NotificationDrawerAdapter.NotificationHolder>() {
+class NotaryNotificationAdapter (private val notifications: ArrayList<Notification>) : RecyclerView.Adapter<NotaryNotificationAdapter.NotaryNotificationHolder>() {
 
-    class NotificationHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class NotaryNotificationHolder(view: View) : RecyclerView.ViewHolder(view) {
         var notificationText: TextView
         var notificationStatus: ImageView
         var notificationBorderColor : CardView
@@ -26,22 +26,20 @@ class NotificationDrawerAdapter (private val notifications: ArrayList<Notificati
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaryNotificationHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.notification_card, parent, false)
-        return NotificationHolder(view)
+        return NotaryNotificationHolder(view)
     }
 
-    override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        holder.notificationText.text = notifications[position].notificationText
-        when(notifications[position].notificationStatus){
-            CHECKED -> holder.notificationStatus.setImageResource(R.drawable.checked_green)
-            DENIED ->  {
-                holder.run {
-                    notificationStatus.setImageResource(R.drawable.denied_red)
-                    notificationBorderColor.setCardBackgroundColor(Color.RED)
-                }
+    override fun onBindViewHolder(holder: NotaryNotificationHolder, position: Int) {
+        when (notifications[position].notificationStatus) {
+            PENDING -> holder.run {
+                notificationText.text = notifications[position].notificationText
+                notificationStatus.setImageResource(R.drawable.pending_blue)
+                notificationBorderColor.setCardBackgroundColor(Color.CYAN)
             }
-         }
+            else -> {}
+        }
     }
 
     override fun getItemCount() = notifications.size

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#D5D5D5"
+    tools:context=".interfaceActivity.OpenUserFolder">
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="380dp"
+        android:layout_height="720dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/new_folder_recycler"
+            android:layout_width="380dp"
+            android:layout_height="570dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/new_folder_name"
+            android:layout_width="192dp"
+            android:layout_height="54dp"
+            android:hint="@string/folder_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="0dp"
+            android:textColor="#616161"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.159"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022"
+            tools:ignore="LabelFor,TextContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/add_new_file"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/plus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/new_folder_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_new_folder"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="131dp"
+            android:layout_height="66dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="@string/create_new_folder"
+            android:textColor="#455A64"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/new_folder_recycler"
+            app:strokeColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="1dp"
+            android:background="#616161"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

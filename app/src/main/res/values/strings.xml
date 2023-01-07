@@ -21,7 +21,7 @@
     <string name="unapproved">Unapproved</string>
     <string name="_99">99</string>
     <string name="name_surname">Name Surname</string>
-    <string name="folder_name">Folder_name</string>
+    <string name="folder_name">Folder name</string>
     <string name="status_img">status_img</string>
     <string name="folder_img">folder_img</string>
     <string name="doccrypto">DocCrypto</string>
@@ -31,7 +31,7 @@
     <string name="the_document_doc_name_has_been_approved">The document \'Doc name\' has been approved</string>
     <string name="see_document"><![CDATA[> See document]]></string>
     <string name="no_notifications">NO NOTIFICATIONS</string>
-    <string name="create_a_folder">Create a folder</string>
+    <string name="create_new_folder">Create new folder</string>
     <string name="log_out">LOG OUT</string>
     <string name="upload_doc">Upload document</string>
     <string name="title_activity_main">MainActivity</string>
@@ -41,4 +41,5 @@
     <string name="user_id">User id</string>
     <string name="personal">Personal</string>
     <string name="public.">PUBLIC</string>
+    <string name="doc_name">Doc name</string>
 </resources>

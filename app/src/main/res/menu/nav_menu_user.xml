@@ -5,6 +5,10 @@
 
     <item
         android:id="@+id/menu_create_new_folder"
-        android:title="@string/create_a_folder"
+        android:title="@string/create_new_folder"
         android:icon="@drawable/create_folder"/>
+    <item
+        android:id="@+id/menu_log_out_user"
+        android:title="@string/log_out"
+        android:icon="@drawable/logout"/>
 </menu>

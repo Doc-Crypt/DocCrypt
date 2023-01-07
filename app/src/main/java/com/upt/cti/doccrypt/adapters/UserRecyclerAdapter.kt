@@ -10,16 +10,26 @@ import com.upt.cti.doccrypt.entity.DocFile
 import com.upt.cti.doccrypt.entity.DocFileStatus.*
 
 
-class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : RecyclerView.Adapter<UserRecyclerAdapter.DocFileHolder>() {
-
-    class DocFileHolder(view: View) : RecyclerView.ViewHolder(view) {
+class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>, private val listener: OnItemClickListener) : RecyclerView.Adapter<UserRecyclerAdapter.DocFileHolder>() {
+    inner class DocFileHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         var folderName: TextView
         var folderStatus: ImageView
 
         init {
             folderStatus = view.findViewById(R.id.user_folder_status)
             folderName = view.findViewById(R.id.user_folder_name)
+
+            view.setOnClickListener(this)
         }
+
+        override fun onClick(v: View?) {
+            val position:Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onDocFileClick(position)
+            }
+        }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocFileHolder {
@@ -37,4 +47,8 @@ class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>) : Rec
     }
 
     override fun getItemCount() = filesAndFolders.size
+
+    interface OnItemClickListener {
+        fun onDocFileClick(position: Int)
+    }
 }

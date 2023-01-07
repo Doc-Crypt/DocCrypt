@@ -10,24 +10,24 @@ import com.upt.cti.doccrypt.entity.Folder
 import com.upt.cti.doccrypt.entity.FolderStatus.*
 
 
-class NotaryFoldersAdapter(private val filesAndFolders: ArrayList<Folder>) : RecyclerView.Adapter<NotaryFoldersAdapter.FolderHolder>() {
+class NotaryPersonalFoldersAdapter(private val filesAndFolders: ArrayList<Folder>) : RecyclerView.Adapter<NotaryPersonalFoldersAdapter.PersonalFolderHolder>() {
 
-    class FolderHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class PersonalFolderHolder(view: View) : RecyclerView.ViewHolder(view) {
         var folderName: TextView
         var folderStatus: ImageView
 
         init {
-            folderStatus = view.findViewById(R.id.notary_folder_status)
-            folderName = view.findViewById(R.id.notary_folder_name)
+            folderStatus = view.findViewById(R.id.notary_personal_folder_status)
+            folderName = view.findViewById(R.id.notary_personal_folder_name)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.folder_recycler, parent, false)
-        return FolderHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonalFolderHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.personal_folder_recycler, parent, false)
+        return PersonalFolderHolder(view)
     }
 
-    override fun onBindViewHolder(holder: FolderHolder, position: Int) {
+    override fun onBindViewHolder(holder: PersonalFolderHolder, position: Int) {
         holder.folderName.text = filesAndFolders[position].folderName
         when(filesAndFolders[position].folderStatus){
             CHECKED -> {
@@ -42,6 +42,7 @@ class NotaryFoldersAdapter(private val filesAndFolders: ArrayList<Folder>) : Rec
                 holder.folderStatus.setImageResource(R.drawable.pending)
                 holder.folderStatus.setBackgroundResource(R.color.yellow)
             }
+            else -> {}
         }
     }
 
