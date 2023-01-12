@@ -1,5 +1,6 @@
 package com.upt.cti.doccrypt.interfaceActivity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -12,11 +13,14 @@ import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.adapters.NotaryNotificationAdapter
 import com.upt.cti.doccrypt.adapters.NotaryPersonalFoldersAdapter
 import com.upt.cti.doccrypt.adapters.NotaryPublicFoldersAdapter
+import com.upt.cti.doccrypt.authentication_manager.AuthenticationManager
+import com.upt.cti.doccrypt.authentication_manager.CurrentNotary
 import com.upt.cti.doccrypt.databinding.ActivityNotaryInterfaceBinding
 import com.upt.cti.doccrypt.entity.Folder
-import com.upt.cti.doccrypt.entity.FolderStatus
+import com.upt.cti.doccrypt.entity.FileStatus
 import com.upt.cti.doccrypt.entity.Notification
 import com.upt.cti.doccrypt.entity.NotificationStatus
+import com.upt.cti.doccrypt.loginActivity.Login
 
 
 class  NotaryInterface : DrawerBase() {
@@ -36,7 +40,13 @@ class  NotaryInterface : DrawerBase() {
         drawerLeft.inflateMenu(R.menu.nav_menu_notary)
         drawerLeft.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.menu_log_out_user-> Toast.makeText(applicationContext, "Log out", Toast.LENGTH_SHORT).show()
+                R.id.menu_log_out_notary -> {
+                    Toast.makeText(applicationContext, "Logout", Toast.LENGTH_SHORT).show()
+                    AuthenticationManager.logout()
+                    CurrentNotary.clearCurrentUser()
+                    val intent = Intent(this, Login::class.java)
+                    startActivity(intent)
+                }
             }
             true
         }
@@ -71,7 +81,6 @@ class  NotaryInterface : DrawerBase() {
         publicBtn = findViewById(R.id.public_btn)
 
         var notaryFolders = getListOfPersonalFolders()
-
         folderRV.adapter = NotaryPersonalFoldersAdapter(notaryFolders)
         getFolderRecyclerContent(notaryFolders)
 
@@ -90,7 +99,6 @@ class  NotaryInterface : DrawerBase() {
             notaryFolders = getListOfPublicFolders()
             folderRV.adapter = NotaryPublicFoldersAdapter(notaryFolders)
             getFolderRecyclerContent(notaryFolders)
-
             personalBtn.setBackgroundColor(Color.LTGRAY)
             personalBtn.setTextColor(Color.BLACK)
             publicBtn.setBackgroundColor(Color.BLACK)
@@ -106,27 +114,11 @@ class  NotaryInterface : DrawerBase() {
     }
 
     private fun getListOfPersonalFolders(): ArrayList<Folder>{
-        val list =  ArrayList<Folder>()
-        for (i in 0 .. 8){
-            val folderStatus: FolderStatus = when (i % 3) {
-                0 -> FolderStatus.CHECKED
-                1 -> FolderStatus.DENIED
-                else -> FolderStatus.PENDING
-            }
-
-            list.add(Folder("Personal Folder $i", folderStatus))
-        }
-        return list
+        return CurrentNotary.personalFolders
     }
 
     private fun getListOfPublicFolders(): ArrayList<Folder>{
-        val list =  ArrayList<Folder>()
-        for (i in 0 .. 5){
-            val folderStatus: FolderStatus = FolderStatus.PUBLIC
-
-            list.add(Folder("Public Folder $i", folderStatus))
-        }
-        return list
+        return CurrentNotary.publicFolders
     }
 
     private fun getListOfNotaryNotifications(): ArrayList<Notification>{

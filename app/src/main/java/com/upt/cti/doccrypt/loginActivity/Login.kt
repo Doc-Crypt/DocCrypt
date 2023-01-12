@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.upt.cti.doccrypt.R
 import com.upt.cti.doccrypt.authentication_manager.AuthenticationManager
+import com.upt.cti.doccrypt.authentication_manager.CurrentNotary
+import com.upt.cti.doccrypt.authentication_manager.CurrentUser
+import com.upt.cti.doccrypt.interfaceActivity.NotaryInterface
 import com.upt.cti.doccrypt.interfaceActivity.UserInterface
 
 class Login : AppCompatActivity() {
@@ -51,10 +54,24 @@ class Login : AppCompatActivity() {
             val email = email.text.toString()
             val password = password.text.toString()
             AuthenticationManager.login(email, password, this)
+
+            if(AuthenticationManager.getUsername() != null) {
+                if(AuthenticationManager.getIsNotary()) AuthenticationManager.getUsername()
+                    ?.let { it1 -> CurrentNotary.getFolders(this, it1) }
+                else AuthenticationManager.getUsername()
+                    ?.let { it1 -> CurrentUser.getFolders(this, it1) }
+            }
+
             if(AuthenticationManager.getIsLoggedIn()){
                 Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, UserInterface::class.java)
-                startActivity(intent)
+                if(AuthenticationManager.getIsNotary()){
+                    val intent = Intent(this, NotaryInterface::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this, UserInterface::class.java)
+                    startActivity(intent)
+                }
+
             }else  Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
         }
 

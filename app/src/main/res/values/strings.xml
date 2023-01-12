@@ -42,4 +42,6 @@
     <string name="personal">Personal</string>
     <string name="public.">PUBLIC</string>
     <string name="doc_name">Doc name</string>
+    <string name="document_name">Document name</string>
+    <string name="new_folder">new Folder</string>
 </resources>

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/folder_list"
         android:layout_width="380dp"
         android:layout_height="600dp"
         android:background="@drawable/shadow"
@@ -85,12 +85,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/user_info_constrain"
         android:layout_width="380dp"
         android:layout_height="110dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/shadow"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include3">
@@ -184,5 +183,71 @@
             app:layout_constraintVertical_bias="0.811"
             tools:ignore="TextContrastCheck" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/add_new_folder_form"
+        android:layout_width="344dp"
+        android:layout_height="169dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include3">
+
+
+        <EditText
+            android:id="@+id/new_folder_name"
+            android:layout_width="273dp"
+            android:layout_height="59dp"
+            android:hint="@string/folder_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="0dp"
+            android:text="@string/new_folder"
+            android:textColor="#616161"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.278"
+            tools:ignore="LabelFor,TextContrastCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_new_folder"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="131dp"
+            android:layout_height="66dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="@string/create_new_folder"
+            android:textColor="#455A64"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="1dp"
+            android:background="#616161"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 package com.upt.cti.doccrypt.entity
 
-enum class FolderStatus {
+enum class FileStatus {
     CHECKED, DENIED, PENDING, PUBLIC
 }

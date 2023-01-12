@@ -6,11 +6,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.upt.cti.doccrypt.R
-import com.upt.cti.doccrypt.entity.DocFile
-import com.upt.cti.doccrypt.entity.DocFileStatus.*
+import com.upt.cti.doccrypt.entity.Folder
+import com.upt.cti.doccrypt.entity.FileStatus.*
 
 
-class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>, private val listener: OnItemClickListener) : RecyclerView.Adapter<UserRecyclerAdapter.DocFileHolder>() {
+class UserRecyclerAdapter(private val filesAndFolders: ArrayList<Folder>, private val listener: OnItemClickListener) : RecyclerView.Adapter<UserRecyclerAdapter.DocFileHolder>() {
     inner class DocFileHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         var folderName: TextView
         var folderStatus: ImageView
@@ -39,10 +39,11 @@ class UserRecyclerAdapter(private val filesAndFolders: ArrayList<DocFile>, priva
 
     override fun onBindViewHolder(holder: DocFileHolder, position: Int) {
         holder.folderName.text = filesAndFolders[position].folderName
-        when(filesAndFolders[position].folderStatus){
+        when(filesAndFolders[position].fileStatus){
             CHECKED -> holder.folderStatus.setImageResource(R.drawable.checked)
             DENIED ->  holder.folderStatus.setImageResource(R.drawable.denied)
             PENDING -> holder.folderStatus.setImageResource(R.drawable.pending)
+            else -> {}
         }
     }
 
