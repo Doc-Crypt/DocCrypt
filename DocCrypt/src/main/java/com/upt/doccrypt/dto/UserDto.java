@@ -3,6 +3,7 @@ package com.upt.doccrypt.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.upt.doccrypt.model.Status;
 import com.upt.doccrypt.model.user.Customer;
+import com.upt.doccrypt.model.user.Notary;
 import com.upt.doccrypt.model.user.User;
 import lombok.Data;
 
@@ -43,6 +44,19 @@ public class UserDto {
         customer.setUpdated(new Date());
         customer.setStatus(Status.ACTIVE);
         return customer;
+    }
+
+    public Notary toNotary(){
+        Notary notary = new Notary();
+        notary.setUsername(username);
+        notary.setFirstName(firstName);
+        notary.setLastName(lastName);
+        notary.setEmail(email);
+        notary.setPassword(password);
+        notary.setCreated(new Date());
+        notary.setUpdated(new Date());
+        notary.setStatus(Status.ACTIVE);
+        return notary;
     }
 
     public static UserDto fromUser(User user) {

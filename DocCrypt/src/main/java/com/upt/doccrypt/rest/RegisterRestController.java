@@ -3,9 +3,11 @@ package com.upt.doccrypt.rest;
 import com.upt.doccrypt.dto.UserDto;
 import com.upt.doccrypt.model.NotaryCandidate;
 import com.upt.doccrypt.model.Status;
+import com.upt.doccrypt.model.user.Customer;
 import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.repository.NotaryQueueRepository;
 import com.upt.doccrypt.security.jwt.JwtTokenProvider;
+import com.upt.doccrypt.service.CustomerService;
 import com.upt.doccrypt.service.NotaryQueueService;
 import com.upt.doccrypt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,15 @@ public class RegisterRestController{
     private final JwtTokenProvider jwtTokenProvider;
 
     private final UserService userService;
+    private final CustomerService customerService;
     private final NotaryQueueService notaryQueueService;
     private final NotaryQueueRepository notaryQueueRepository;
 
-    @Autowired
-    public RegisterRestController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, NotaryQueueService notaryQueueService,
-                                  NotaryQueueRepository notaryQueueRepository) {
+    public RegisterRestController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, CustomerService customerService, NotaryQueueService notaryQueueService, NotaryQueueRepository notaryQueueRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
+        this.customerService = customerService;
         this.notaryQueueService = notaryQueueService;
         this.notaryQueueRepository = notaryQueueRepository;
     }
@@ -52,10 +54,10 @@ public class RegisterRestController{
             requestDto.setUsername(requestDto.getUsername() + UUID.randomUUID());
         }
         if(requestDto.getPassword().isEmpty()) throw new BadCredentialsException("Password is empty");
-        User user = requestDto.toUser();
-        user.setCreated(new Date());
-        user.setUpdated(new Date());
-//        userService.register(user);
+        Customer customer = requestDto.toCustomer();
+        customer.setCreated(new Date());
+        customer.setUpdated(new Date());
+        customerService.register(customer);
         Map<String, String> response = new HashMap<>();
         response.put("Response", "Ok");
         response.put("username", requestDto.getUsername());

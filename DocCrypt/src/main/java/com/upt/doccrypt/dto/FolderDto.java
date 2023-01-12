@@ -7,14 +7,21 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FolderDto {
     private String fileName;
+    private long id;
     private String ownerUsername;
+    private List<DocumentDto> documentDtoList;
+    private FileStatus fileStatus;
 
-
+    public void addToDocuments(DocumentDto documentDto){
+        if (this.documentDtoList == null) documentDtoList = new ArrayList<>();
+        documentDtoList.add(documentDto);
+    }
     public Folder toFolder(){
         Folder folder = new Folder();
         folder.setFileName(fileName);

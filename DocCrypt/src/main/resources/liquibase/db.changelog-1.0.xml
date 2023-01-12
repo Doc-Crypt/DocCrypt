@@ -104,7 +104,7 @@
             <column name="last_name" type="VARCHAR(255)"/>
             <column name="email" type="VARCHAR(255)"/>
             <column name="password" type="VARCHAR(255)"/>
-            <column name="prove_document" type="BLOB"/>
+            <column name="prove_document" type="LONGBLOB"/>
         </createTable>
         <addUniqueConstraint columnNames="email" constraintName="uc_registration_notary_email" tableName="registration_notary"/>
     </changeSet>

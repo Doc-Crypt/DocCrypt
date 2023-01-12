@@ -11,5 +11,6 @@ public interface NotaryService {
     List<Notary> getAll();
     Notary findByUsername(String username);
     Boolean containUserByEmail(String email);
-    Notary getUserByEmail(String email);
+    Notary getNotaryByEmail(String email);
 }
+

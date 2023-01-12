@@ -1,5 +1,6 @@
 package com.upt.doccrypt.model.file;
 
+import com.upt.doccrypt.dto.FolderDto;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,6 +32,17 @@ public class StackFolder {
         stackFolder.setCreated(new Date());
         stackFolder.setUpdated(new Date());
         return stackFolder;
+    }
+
+    public FolderDto toFolderDto(){
+        FolderDto folderDto = new FolderDto();
+        folderDto.setId(getId());
+        folderDto.setFileName(folder.getFileName());
+        folderDto.setFileStatus(folder.getStatus());
+        folder.getDocuments().forEach(document -> {
+            folderDto.addToDocuments(document.toDto());
+        });
+        return folderDto;
     }
 
 

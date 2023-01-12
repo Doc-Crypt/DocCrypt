@@ -52,7 +52,7 @@ public class NotaryServiceImpl implements NotaryService {
 
     @Override
     public Notary findByUsername(String username) {
-        return null;
+        return notaryRepository.findByUsername(username);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class NotaryServiceImpl implements NotaryService {
     }
 
     @Override
-    public Notary getUserByEmail(String email) {
-        return null;
+    public Notary getNotaryByEmail(String email) {
+        return notaryRepository.findByEmail(email);
     }
 }

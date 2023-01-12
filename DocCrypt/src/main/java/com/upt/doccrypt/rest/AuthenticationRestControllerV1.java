@@ -1,6 +1,7 @@
 package com.upt.doccrypt.rest;
 
 import com.upt.doccrypt.dto.AuthenticationRequestDto;
+import com.upt.doccrypt.model.user.Notary;
 import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.security.jwt.JwtTokenProvider;
 import com.upt.doccrypt.service.UserService;
@@ -50,7 +51,6 @@ public class AuthenticationRestControllerV1 {
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
 
-
             if (user == null) {
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
             }
@@ -60,6 +60,9 @@ public class AuthenticationRestControllerV1 {
             Map<Object, Object> response = new HashMap<>();
             response.put("FullName", user.getFirstName() + " " + user.getLastName());
             response.put("token", token);
+            response.put("username", user.getUsername());
+            response.put("isNotary", user instanceof Notary);
+
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {

@@ -32,7 +32,26 @@ public class PublicStackFolderServiceImpl implements PublicStackFolderService {
     }
 
     @Override
+    public StackFolder getByFolderId(long id) throws Exception {
+        List<StackFolder> stackFolderList = publicStackFolderRepository.findAll();
+        for (StackFolder stackFolder : stackFolderList) {
+            if(stackFolder.getFolder().getId() == id) return stackFolder;
+        }
+        return null;
+    }
+
+    @Override
+    public StackFolder getById(long id) {
+        return publicStackFolderRepository.findById(id);
+    }
+
+    @Override
     public List<StackFolder> getAll() {
         return publicStackFolderRepository.findAll();
+    }
+
+    @Override
+    public void delete(StackFolder stackFolder) {
+        publicStackFolderRepository.delete(stackFolder);
     }
 }

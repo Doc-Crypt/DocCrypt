@@ -12,13 +12,17 @@ import com.upt.doccrypt.model.user.Customer;
 import com.upt.doccrypt.model.user.Notary;
 import com.upt.doccrypt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,19 +51,6 @@ public class AdminRestControllerV1 {
         this.stackFolderService = stackFolderService;
     }
 
-
-
-
-    //    @GetMapping(value = "users/{id}")
-//    public ResponseEntity<AdminUserDto> getUserById(@PathVariable(name = "id") Long id) {
-//        User user = userService.findById(id);
-//
-//        if (user == null) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        AdminUserDto result = AdminUserDto.fromUser(user);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
     @GetMapping(value = "candidates")
     public ResponseEntity<List<AdminNotaryCandidateDto>> getAllNotaryCandidates(){
         List<AdminNotaryCandidateDto> adminNotaryCandidateDtoList = new ArrayList<AdminNotaryCandidateDto>();
@@ -87,6 +78,7 @@ public class AdminRestControllerV1 {
     @GetMapping("/candidate_document/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getProveDocumentOfCandidate(@PathVariable long id) throws IOException {
+        File file = new File(System.getProperty("user.dir") + "/file.pdf");
         NotaryCandidate notaryCandidate = notaryQueueService.getNotaryCandidateById(id);
         byte[] bytes = notaryCandidate.getProveDocument();
         HttpHeaders headers = new HttpHeaders();
@@ -97,6 +89,7 @@ public class AdminRestControllerV1 {
         ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
         return response;
     }
+
     @GetMapping("/add_notary")
     @ResponseBody
     public ResponseEntity<Notary> addNotary(){

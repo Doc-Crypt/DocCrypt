@@ -4,17 +4,22 @@ package com.upt.doccrypt.rest;
 import com.upt.doccrypt.dto.AuthenticationRequestDto;
 import com.upt.doccrypt.dto.FolderDto;
 import com.upt.doccrypt.dto.UserDto;
+import com.upt.doccrypt.model.NotaryCandidate;
 import com.upt.doccrypt.model.file.Document;
 import com.upt.doccrypt.model.file.FileStatus;
 import com.upt.doccrypt.model.file.Folder;
 import com.upt.doccrypt.model.file.StackFolder;
 import com.upt.doccrypt.model.user.Customer;
+import com.upt.doccrypt.model.user.Notary;
 import com.upt.doccrypt.model.user.User;
 import com.upt.doccrypt.repository.file_repository.FolderRepository;
 import com.upt.doccrypt.repository.user_repository.CustomerRepository;
+import com.upt.doccrypt.repository.user_repository.NotaryRepository;
 import com.upt.doccrypt.security.jwt.JwtTokenProvider;
 import com.upt.doccrypt.service.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,10 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.rmi.server.ExportException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @RestController
@@ -46,9 +48,12 @@ public class CustomerRestController {
     private final CustomerRepository customerRepository;
     private final FolderRepository folderRepository;
     private final PublicStackFolderService stackFolderService;
+    private final NotaryService notaryService;
+    private final NotaryRepository notaryRepository;
 
 
-    public CustomerRestController(CustomerService customerService, FolderService folderService, DocumentService documentService, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, CustomerRepository customerRepository, FolderRepository folderRepository, PublicStackFolderService stackFolderService) {
+    public CustomerRestController(CustomerService customerService, FolderService folderService, DocumentService documentService, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, CustomerRepository customerRepository, FolderRepository folderRepository, PublicStackFolderService stackFolderService, NotaryService notaryService,
+                                  NotaryRepository notaryRepository) {
         this.customerService = customerService;
         this.folderService = folderService;
         this.documentService = documentService;
@@ -58,6 +63,8 @@ public class CustomerRestController {
         this.customerRepository = customerRepository;
         this.folderRepository = folderRepository;
         this.stackFolderService = stackFolderService;
+        this.notaryService = notaryService;
+        this.notaryRepository = notaryRepository;
     }
 
     @PostMapping("customer_login")
@@ -120,13 +127,14 @@ public class CustomerRestController {
     @PostMapping("customer_add_Document_to_Folder")
     public ResponseEntity<Folder> addDocumentInFolder(@RequestParam("file") MultipartFile file,
                                               @RequestParam("username") String username,
+                                              @RequestParam("filename") String filename,
                                               @RequestParam("folderId") long folderId) throws Exception {
 
         Folder folder = getFolderFromCustomerById(username, folderId);
         Document document = new Document();
         document.setFile(file.getBytes());
         document.setStatus(FileStatus.PENDING);
-        document.setFileName(file.getName());
+        document.setFileName(filename);
         document.setUpdated(new Date());
         document.setCreated(new Date());
 
@@ -150,12 +158,60 @@ public class CustomerRestController {
     }
 
     @PostMapping("customer_post_Folder")
-    public ResponseEntity<StackFolder> postFolderPublic(@RequestParam("username") String username,
-                                                        @RequestParam("folderId") long folderId) throws Exception {
-
-        Folder folder = getFolderFromCustomerById(username, folderId);
+    public ResponseEntity<FolderDto> postFolderPublic(@RequestBody FolderDto folderDto) throws Exception {
+        Folder folder = getFolderFromCustomerById(folderDto.getOwnerUsername(), folderDto.getId());
         StackFolder stackFolder = stackFolderService.post(StackFolder.createStackFolder(folder));
-        return new ResponseEntity<>(stackFolder, HttpStatus.OK);
+        return new ResponseEntity<>(stackFolder.toFolderDto(), HttpStatus.OK);
+    }
+    @GetMapping("/candidate/doc/{docId}")
+    @ResponseBody
+    public ResponseEntity<byte[]> getProveDocumentOfCandidate(@PathVariable long docId) throws IOException {
+        Document document = documentService.getById(docId);
+        byte[] bytes = document.getFile();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        String filename = document.getFileName();
+        headers.add("content-disposition", "inline;filename=" + filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
+        return response;
+    }
+
+    @PostMapping("customer/folders")
+    public ResponseEntity getFolders(@RequestBody UserDto requestDto) {
+        System.out.println(requestDto);
+       Customer customer = customerService.findByUsername(requestDto.getUsername());
+        Map<Object, Object> response = new HashMap<>();
+        int peFolders = 0, deFolders = 0, apFolders = 0;
+        for (Folder folder : customer.getPersonalListOfFolders()) {
+            if(folder.getStatus() == FileStatus.PENDING) peFolders++;
+            if(folder.getStatus() == FileStatus.DENIED) deFolders++;
+            if(folder.getStatus() == FileStatus.CHECKED) apFolders++;
+        }
+        List<Folder> folders = customer.getPersonalListOfFolders();
+        List<FolderDto> foldersDto = new ArrayList<>();
+        folders.forEach(folder -> {
+            foldersDto.add(folder.toFolderDto());
+        });
+
+        response.put("folders", foldersDto);
+        response.put("PENDING", peFolders);
+        response.put("DENIED", deFolders);
+        response.put("CHECKED", apFolders);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("customer/choose_notary_to_sign")
+    public ResponseEntity<Notary> chooseNotaryNoSign(@RequestParam("customerUsername") String customerUsername,
+                                                          @RequestParam("notaryUsername") String notaryUsername,
+                                                          @RequestParam("folderId") long folderId) throws Exception {
+
+        Folder folder = getFolderFromCustomerById(customerUsername, folderId);
+        Notary notary = notaryService.findByUsername(notaryUsername);
+        notary.addFolder(folder);
+        notary = notaryRepository.save(notary);
+        return new ResponseEntity<>(notary, HttpStatus.OK);
     }
 
 }
